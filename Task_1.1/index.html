@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1.1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
+
+        body {
+            background-color: rgb(145, 13, 13);
+        }
+
+        #container {
+            background-color: black;
+            border: solid;
+            border-color: rgb(255, 255, 255);
+            border-width: 3px;
+            height: 400px;
+            width: 600px;
+            margin: 100px 10px 0px 100px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h {
+            color: white;
+            font-size: xxx-large;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        p {
+            color: white;
+            font-size: xx-large;
+            font-family: 'Pangolin', cursive;
+        }
+
+        #userInput {
+            width: 150px;
+            height: 30px;
+            margin: 25px auto;
+        }
+
+        #btn {
+            height: 40px;
+            width: 80px;
+            font-size: 25px;
+            font-family: 'Poppins', sans-serif;
+            margin: 25px auto auto 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h>Guess The Number!</h>
+        <p id="outputText">Enter a number between 1 - 99 below</p>
+        <input type="text" name="" id="userInput">
+        <button id="btn">Enter</button>
+        <p id="guessCount">Number of Guesses: 0</p>
+    </div>
+    <script>
+        let guess = 0;
+        let btn = document.getElementById("btn");
+        let output = document.getElementById("outputText");
+        let num = Math.floor(Math.random() * 100);
+        btn.addEventListener('click', function () {
+            let input = document.getElementById("userInput").value;
+            if (input == num) {
+                output.innerHTML = "You guessed is right!";
+            }
+            else if (input > num) {
+                output.innerHTML = "Your guess is too high!";
+            }
+            else if (input < num) {
+                output.innerHTML = "Your guess is too low!";
+            }
+            guess = guess + 1;
+            document.getElementById("guessCount").innerHTML = "Number of Guesses: " + guess;
+        });
+    </script>
+</body>
+
+</html>
