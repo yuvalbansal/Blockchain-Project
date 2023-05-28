@@ -22,7 +22,7 @@
             border-width: 3px;
             height: 400px;
             width: 600px;
-            margin: 100px 10px 0px 100px;
+            margin: 30px 10px 0px 100px;
             text-align: center;
             padding: 10px;
         }
@@ -31,6 +31,11 @@
             color: white;
             font-size: xxx-large;
             font-family: 'Rajdhani', sans-serif;
+        }
+
+        #top {
+            font-size: 80px;
+            margin: 20px 0px 0px 20px;
         }
 
         p {
@@ -42,7 +47,7 @@
         #userInput {
             width: 150px;
             height: 30px;
-            margin: 25px auto;
+            margin: auto auto auto auto;
         }
 
         #btn {
@@ -50,38 +55,107 @@
             width: 80px;
             font-size: 25px;
             font-family: 'Poppins', sans-serif;
-            margin: 25px auto auto 5px;
+            margin: 10px auto auto auto;
+        }
+
+        #restart {
+            height: 60px;
+            width: 180px;
+            font-size: 25px;
+            font-family: 'Poppins', sans-serif;
+            margin: 10px auto auto auto;
+        }
+
+        #start {
+            height: 80px;
+            width: 180px;
+            font-size: 25px;
+            font-family: 'Poppins', sans-serif;
+            margin: 160px auto auto auto;
         }
     </style>
 </head>
 
 <body>
+    <div id="top">
+        <h id="top">Number Guessing Game</h>
+    </div>
     <div id="container">
-        <h>Guess The Number!</h>
-        <p id="outputText">Enter a number between 1 - 99 below</p>
-        <input type="text" name="" id="userInput">
-        <button id="btn">Enter</button>
-        <p id="guessCount">Number of Guesses: 0</p>
+        <button id="start">Start Game</button><br>
+        <h id="head" style="display:none">Guess The Number!</h>
+        <p id="outputText" style="display:none">Enter a number between 0 - 99 below</p>
+        <input type="text" name="" id="userInput" style="display:none">
+        <button id="btn" style="display:none">Enter</button>
+        <p id="guessCount" style="display:none">Generated a Random Number</p>
+        <button id="restart" style="display:none">Play Again</button>
     </div>
     <script>
         let guess = 0;
-        let btn = document.getElementById("btn");
-        let output = document.getElementById("outputText");
         let num = Math.floor(Math.random() * 100);
-        btn.addEventListener('click', function () {
-            let input = document.getElementById("userInput").value;
-            if (input == num) {
-                output.innerHTML = "You guessed is right!";
-            }
-            else if (input > num) {
-                output.innerHTML = "Your guess is too high!";
-            }
-            else if (input < num) {
-                output.innerHTML = "Your guess is too low!";
-            }
-            guess = guess + 1;
-            document.getElementById("guessCount").innerHTML = "Number of Guesses: " + guess;
+
+        let start = document.getElementById("start");
+        let head = document.getElementById("head");
+        let output = document.getElementById("outputText");
+        let input = document.getElementById("userInput");
+        let btn = document.getElementById("btn");
+        let count = document.getElementById("guessCount");
+        let restart = document.getElementById("restart");
+
+        start.addEventListener('click', function () {
+            head.style.display = "block";
+            output.style.display = "block";
+            input.style.display = "block";
+            btn.style.display = "block";
+            count.style.display = "block";
+            start.style.display = "none";
         });
+
+        btn.addEventListener('click', function () {
+            count.innerHTML = "Number of Guesses: 0"
+            let val = input.value;
+            if (val == num) {
+                output.innerHTML = "Your guess "+val+", is right!";
+                guess = guess + 1;
+                input.style.display = "none";
+                btn.style.display = "none";
+                restart.style.display = "block";
+                count.innerHTML = "Total Number of Guesses: " + guess;
+            }
+            else if (isNaN(val)) {
+                output.innerHTML = "Invalid guess";
+            }
+            else if (val < 0 || val > 99) {
+                output.innerHTML = "Invalid guess";
+            }
+            else if (val == '') {
+                output.innerHTML = "Invalid guess";
+            }
+            else if (val > num) {
+                output.innerHTML = val + " is too high!";
+                guess = guess + 1;
+                count.innerHTML = "Number of Guesses: " + guess;
+            }
+            else if (val < num) {
+                output.innerHTML = val + " is too low!";
+                guess = guess + 1;
+                count.innerHTML = "Number of Guesses: " + guess;
+            }
+            // else{
+            //     output.innerHTML = "Invalid guess";
+            // }
+        });
+
+        restart.addEventListener('click', function () {
+            guess = 0;
+            head.style.display = "none";
+            output.style.display = "none";
+            count.style.display = "none";
+            start.style.display = "block";
+            restart.style.display = "none";
+            input.value = "";
+            output.innerHTML = "Enter a number between 0 - 99 below";
+            count.innerHTML = "Generated a Random Number";
+        })
     </script>
 </body>
 
