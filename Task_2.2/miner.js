@@ -39,5 +39,5 @@ for (var DataIndex = 0; DataIndex < 10; DataIndex++) {
         nonce++;
     }
     const Block = new block(DataArray[DataIndex], nonce, cryptohash([DataArray[0], 0]));
-    console.log("block",DataIndex+1,JSON.stringify(Block, undefined, 4))
+    console.log("block", DataIndex + 1, JSON.stringify(Block, undefined, 4))
 }
